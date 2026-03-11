@@ -1,0 +1,35 @@
+<!--pages/market/market.wxml-->
+<view class="market-container">
+  
+  <!-- Global Indices -->
+  <view class="section-title">全球指数</view>
+  <view class="indices-grid">
+    <block wx:for="{{indices}}" wx:key="name">
+      <view class="index-card {{item.isUp ? 'bg-up' : 'bg-down'}}">
+        <view class="index-name">{{item.name}}</view>
+        <view class="index-value">{{item.value}}</view>
+        <view class="index-change-row">
+          <text class="index-change {{item.isUp ? 'text-up' : 'text-down'}}">{{item.change}}</text>
+          <text class="index-rate {{item.isUp ? 'text-up' : 'text-down'}}">({{item.rate}})</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- Hot Sectors -->
+  <view class="section-title mt-4">热门板块</view>
+  <t-cell-group theme="card">
+    <block wx:for="{{hotSectors}}" wx:key="name">
+      <t-cell 
+        title="{{item.name}}" 
+        description="{{item.symbol}}"
+        hover 
+        bind:tap="onTapSector"
+        data-symbol="{{item.symbol}}"
+      >
+        <t-icon slot="left-icon" name="chart-bar" size="24px" color="#0052D9" style="margin-right: 8px;" />
+        <t-tag slot="note" variant="light" theme="{{item.isUp ? 'danger' : 'success'}}">{{item.change}}</t-tag>
+      </t-cell>
+    </block>
+  </t-cell-group>
+</view>

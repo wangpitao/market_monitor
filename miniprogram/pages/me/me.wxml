@@ -1,0 +1,66 @@
+<!--pages/me/me.wxml-->
+<t-message id="t-message" />
+
+<view class="me-container">
+  
+  <!-- User Card -->
+  <view class="user-card">
+    <t-avatar 
+      image="{{userInfo.avatarUrl || ''}}" 
+      icon="user" 
+      size="large" 
+      shape="circle" 
+      t-class="user-avatar"
+    />
+    <block wx:if="{{!hasLogin}}">
+      <t-button 
+        theme="primary" 
+        variant="text" 
+        bind:tap="onLoginTap"
+        size="large"
+      >
+        立即登录
+      </t-button>
+    </block>
+    <block wx:else>
+      <view class="user-name">{{userInfo.nickName}}</view>
+      <view class="user-id">ID: {{userInfo._openid}}</view>
+    </block>
+  </view>
+
+  <!-- Menu List -->
+  <t-cell-group theme="card" t-class="menu-list">
+    <t-cell title="设置" hover arrow>
+      <t-icon slot="left-icon" name="setting" size="24px" color="#999" style="margin-right: 12px;" />
+    </t-cell>
+    <t-cell title="联系客服" hover arrow>
+      <t-icon slot="left-icon" name="service" size="24px" color="#999" style="margin-right: 12px;" />
+    </t-cell>
+    <t-cell title="关于我们" hover arrow>
+      <t-icon slot="left-icon" name="info-circle" size="24px" color="#999" style="margin-right: 12px;" />
+    </t-cell>
+  </t-cell-group>
+
+  <!-- Version Info -->
+  <view class="version-info">v1.0.0 Build 20240225</view>
+</view>
+
+<!-- Login / Register Popup -->
+<t-popup visible="{{loginPopupVisible}}" bind:visible-change="onPopupClose" placement="bottom">
+  <view class="login-popup">
+    <view class="popup-header">完善个人资料</view>
+    <view class="popup-content">
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar-preview" src="{{tempAvatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}" mode="aspectFill"></image>
+        <view class="avatar-tip">点击选择头像</view>
+      </button>
+      
+      <view class="nickname-wrapper">
+        <text class="label">昵称</text>
+        <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onNicknameChange" />
+      </view>
+
+      <t-button theme="primary" block size="large" bind:tap="onSubmitRegister" loading="{{isRegistering}}">保存并登录</t-button>
+    </view>
+  </view>
+</t-popup>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股票详情 - AAPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0052D9', 
+                        success: '#00A870', 
+                        error: '#E34D59',
+                        gray: {
+                            50: '#f3f3f3',
+                            100: '#eeeeee',
+                            400: '#999999',
+                            900: '#111111'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased pb-20">
+
+    <!-- Header (Simple Back) -->
+    <header class="bg-white sticky top-0 z-10 px-4 py-3 flex items-center shadow-sm">
+        <a href="index.html" class="mr-4 text-gray-600 hover:text-brand transition"><i class="fas fa-arrow-left"></i></a>
+        <h1 class="text-lg font-bold">AAPL</h1>
+        <div class="ml-auto flex items-center text-xs text-gray-400">
+             <span class="mr-1">US Stock</span>
+             <i class="fas fa-clock"></i>
+        </div>
+    </header>
+
+    <!-- Price Section -->
+    <div class="bg-white px-4 py-4 mb-3 text-center">
+        <div class="text-4xl font-bold tracking-tight text-gray-900">178.35</div>
+        <div class="flex justify-center items-center mt-2 space-x-2">
+            <span class="text-error font-bold flex items-center"><i class="fas fa-caret-up mr-1"></i> +2.20</span>
+            <span class="text-error font-bold text-sm bg-error/10 px-2 py-0.5 rounded">+1.25%</span>
+        </div>
+        <div class="text-xs text-gray-400 mt-2">已收盘: 02-24 16:00 EST</div>
+        <button class="w-full mt-4 py-2 border border-brand text-brand rounded-full text-sm font-medium hover:bg-brand hover:text-white transition flex justify-center items-center">
+             <i class="far fa-bell mr-2"></i> 订阅价格预警
+        </button>
+    </div>
+
+    <!-- Chart Placeholder -->
+    <div class="bg-white px-4 py-6 mb-3 h-64 flex flex-col justify-center items-center text-gray-300 border-y border-gray-100">
+        <i class="fas fa-chart-line text-4xl mb-2"></i>
+        <span class="text-sm">K-Line Chart Area</span>
+        <div class="mt-4 w-full h-1 bg-gray-100 rounded overflow-hidden">
+             <div class="bg-brand h-full" style="width: 40%"></div>
+        </div>
+    </div>
+
+    <!-- AI Advisor Section -->
+    <div class="px-4 py-2">
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <h3 class="font-bold flex items-center text-brand">
+                    <i class="fas fa-robot mr-2"></i> AI 交易建议
+                </h3>
+                <span class="text-xs text-gray-400">Just Now</span>
+            </div>
+            
+            <div class="p-4">
+                <!-- AI Result Card -->
+                <div class="bg-green-50 border border-green-100 rounded-lg p-4 mb-4">
+                     <div class="flex justify-between items-start mb-2">
+                         <span class="text-xs font-bold text-green-800 uppercase tracking-wide">Signal</span>
+                         <span class="bg-green-200 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full">CONFIDENCE: 85%</span>
+                     </div>
+                     <div class="text-2xl font-bold text-success mb-2">BUY</div>
+                     <p class="text-sm text-gray-600 leading-relaxed">
+                        Technical indicators suggest a strong upward trend. MACD crossover detected on the 4H chart. Support level held at 175.00.
+                     </p>
+                </div>
+
+                <button class="w-full bg-gray-100 text-gray-600 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition">
+                    <i class="fas fa-redo-alt mr-1"></i> 重新分析
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

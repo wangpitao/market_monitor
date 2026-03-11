@@ -1,0 +1,17 @@
+@import 'miniprogram_npm/tdesign-miniprogram/common/style/index.wxss';
+
+/**app.wxss**/
+page {
+  --td-brand-color: #0052D9;
+  --td-success-color: #00A870;
+  --td-error-color: #E34D59;
+  --td-warning-color: #ED7B2F;
+  background-color: #f6f6f6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+
+.container {
+  box-sizing: border-box;
+} 

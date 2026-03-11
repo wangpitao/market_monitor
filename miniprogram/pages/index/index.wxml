@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<t-message id="t-message" />
+
+<view class="page-container">
+  
+  <!-- Login Guard: Show mask if not logged in -->
+  <view wx:if="{{!hasLogin}}" class="login-mask">
+    <view class="login-tip-card">
+      <t-icon name="lock-on" size="48px" color="#0052D9" style="margin-bottom: 20px;" />
+      <view class="login-title">开启实时盯盘</view>
+      <view class="login-desc">登录后即可同步自选股数据</view>
+      <t-button theme="primary" size="large" bind:tap="onGoToLogin">立即登录</t-button>
+    </view>
+  </view>
+
+  <!-- Search Bar -->
+  <view class="search-box">
+    <t-search 
+      placeholder="搜索股票代码 (如 AAPL)" 
+      value="{{inputValue}}" 
+      bind:change="onInput"
+      bind:submit="onAddStock"
+      action="添加"
+      bind:action-click="onAddStock"
+      disabled="{{!hasLogin}}" 
+    />
+  </view>
+
+  <!-- Stock List -->
+  <view class="stock-list">
+    <block wx:if="{{watchlist.length > 0}}">
+      <t-cell
+        wx:for="{{watchlist}}" 
+        wx:key="_id"
+        title="{{item.symbol}}"
+        description="{{item.name}}"
+        bind:click="onTapStock"
+        data-symbol="{{item.symbol}}"
+        hover
+        bordered="{{false}}"
+        t-class="stock-item"
+      >
+        <view slot="note" class="stock-price-block">
+          <view class="price">{{quotes[item.symbol].price || '--'}}</view>
+          <t-tag 
+            variant="light" 
+            theme="{{quotes[item.symbol].change[0] === '-' ? 'success' : 'danger'}}"
+            size="small"
+          >
+            {{quotes[item.symbol].change || '--'}}
+          </t-tag>
+        </view>
+        <view slot="right-icon" catchtap="stopBubble" class="delete-icon">
+             <t-icon name="close-circle" size="20px" color="#ccc" bind:click="onDeleteStock" data-id="{{item._id}}" data-symbol="{{item.symbol}}" />
+      </view>
+      </t-cell>
+    </block>
+    
+    <!-- Empty State -->
+    <view wx:else class="empty-state">
+      <block wx:if="{{hasLogin}}">
+        <t-icon name="chart-analytics" size="48px" color="#ddd" />
+        <text class="empty-text">暂无自选股，快去添加吧</text>
+      </block>
+    </view>
+  </view>
+</view>

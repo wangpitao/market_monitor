@@ -1,0 +1,72 @@
+/* pages/market/market.wxss */
+.market-container {
+  padding: 24rpx;
+  background-color: #f6f6f6;
+  min-height: 100vh;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 20rpx;
+  margin-left: 8rpx;
+}
+
+.mt-4 {
+  margin-top: 40rpx;
+}
+
+.indices-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.index-card {
+  background-color: #fff;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.02);
+  border-left: 8rpx solid transparent;
+}
+
+.bg-up {
+  border-left-color: #E34D59;
+}
+
+.bg-down {
+  border-left-color: #00A870;
+}
+
+.index-name {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.index-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-top: 8rpx;
+}
+
+.index-change-row {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.index-change {
+  font-size: 24rpx;
+  font-weight: 600;
+  margin-left: 4rpx;
+}
+
+.text-up {
+  color: #E34D59;
+}
+
+.text-down {
+  color: #00A870;
+}

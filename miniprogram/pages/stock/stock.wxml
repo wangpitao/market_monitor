@@ -1,0 +1,113 @@
+<!--pages/stock/stock.wxml-->
+<t-message id="t-message" />
+
+<view class="stock-container">
+  
+  <!-- Header Card -->
+  <view class="header-card">
+    <view class="header-top">
+      <view class="stock-title-block">
+        <view class="stock-name">{{quote.name || symbol}}</view>
+        <view class="symbol-tag">{{symbol}}</view>
+      </view>
+      <t-button 
+        wx:if="{{!isInWatchlist}}" 
+        size="small" 
+        variant="outline" 
+        theme="primary" 
+        bind:tap="addToWatchlist"
+      >
+        + 加入自选
+      </t-button>
+    </view>
+
+    <view class="price-row">
+      <text class="price">{{quote.price || '--'}}</text>
+      <view class="change-block">
+        <t-icon name="{{quote.change[0] === '-' ? 'caret-down' : 'caret-up'}}" size="20px" color="{{quote.change[0] === '-' ? '#00A870' : '#E34D59'}}" />
+        <text class="change-text {{quote.change[0] === '-' ? 'text-down' : 'text-up'}}">{{quote.change || '--'}}</text>
+      </view>
+    </view>
+    <view class="time">更新时间: {{quote.timestamp}}</view>
+  </view>
+
+  <!-- Trend Chart (Canvas) -->
+  <view class="chart-card">
+    <view class="chart-title">近期走势 (30日)</view>
+    <canvas type="2d" id="trendChart" class="trend-canvas"></canvas>
+  </view>
+
+  <!-- Position Input -->
+  <view class="input-card">
+    <view class="card-title">持仓信息 (用于 AI 分析)</view>
+    <t-input label="持仓成本" placeholder="0.00" type="digit" value="{{positionCost}}" bind:change="onCostChange" align="right" />
+    <t-input label="持仓数量" placeholder="0" type="digit" value="{{positionAmount}}" bind:change="onAmountChange" align="right" />
+  </view>
+
+  <!-- AI Section -->
+  <view class="ai-section">
+    <view class="section-header" style="justify-content: space-between;">
+      <view style="display: flex; align-items: center;">
+        <t-icon name="robot" size="20px" color="#0052D9" style="margin-right: 8px;" />
+        <text class="section-title">AI 智能决策</text>
+      </view>
+      <t-button size="small" variant="text" icon="notification" bind:tap="onSubscribe">订阅提醒</t-button>
+    </view>
+
+    <block wx:if="{{!aiResult && !loadingAnalysis}}">
+      <view class="empty-ai-card">
+        <text class="empty-ai-text">输入持仓信息，获取 AI 交易策略</text>
+      </view>
+    </block>
+
+    <block wx:if="{{!aiResult}}">
+      <t-button 
+        theme="primary" 
+        block 
+        loading="{{loadingAnalysis}}" 
+        bind:tap="handleAnalyzeClick"
+        t-class="mt-4"
+        disabled="{{loadingAnalysis}}"
+      >
+        {{!isInWatchlist ? '加入自选并开启 AI' : (!positionCost || !positionAmount ? '请先完善持仓信息' : '生成 AI 分析')}}
+      </t-button>
+
+      <view wx:if="{{loadingAnalysis || analysisProgress > 0}}" class="analysis-status">
+         <t-progress percentage="{{analysisProgress}}" />
+         <view class="status-text">{{analysisStatus}}</view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="ai-result-card {{aiResult.action === 'buy' ? 'bg-buy' : (aiResult.action === 'sell' ? 'bg-sell' : 'bg-hold')}}">
+        <view class="ai-header-row">
+           <text class="ai-action-text">{{aiResult.action}}</text>
+           <t-tag theme="{{aiResult.risk_level === 'high' ? 'danger' : 'success'}}" variant="light">风险: {{aiResult.risk_level}}</t-tag>
+        </view>
+        
+        <view class="ai-trend">趋势判断: {{aiResult.trend}}</view>
+        <view class="ai-reason">理由: {{aiResult.reason}}</view>
+        
+        <view class="ai-grid">
+          <view class="ai-item">
+            <text class="label">建议止损</text>
+            <text class="value loss">{{aiResult.stop_loss}}</text>
+          </view>
+          <view class="ai-item">
+            <text class="label">建议止盈</text>
+            <text class="value profit">{{aiResult.take_profit}}</text>
+          </view>
+        </view>
+        
+        <view class="ai-time" wx:if="{{aiAnalysisTime}}">
+           分析时间: {{aiAnalysisTime}}
+        </view>
+      </view>
+      
+      <t-button theme="default" variant="outline" block icon="refresh" bind:tap="getAIAnalysis" t-class="mt-4">
+        重新分析
+      </t-button>
+    </block>
+  </view>
+
+</view>

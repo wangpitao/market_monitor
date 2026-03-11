@@ -1,0 +1,161 @@
+<!-- 顶部导航栏 -->
+<t-navbar title="我的" />
+
+<!-- 用户信息头部 -->
+<view class="profile-header">
+  <view class="avatar-container">
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <image class="avatar" src="{{avatarUrl}}"></image>
+    </button>
+  </view>
+  
+  <view class="user-info">
+    <text class="user-name" wx:if="{{!isLoggedIn}}">请登录</text>
+    <input wx:else type="nickname" class="weui-input" value="{{userInfo.nickName}}" placeholder="请输入昵称" bindblur="onNicknameBlur" />
+    <text class="user-desc" wx:if="{{!isLoggedIn}}">登录后使用完整功能</text>
+    <text class="user-desc" wx:else>欢迎使用</text>
+  </view>
+  
+  <view class="header-actions" wx:if="{{!isLoggedIn}}">
+    <t-button theme="primary" size="medium" bindtap="onLogin" class="login-btn">微信登录</t-button>
+  </view>
+  
+</view>
+
+<!-- 登录提示（未登录时显示） -->
+<view class="login-prompt" wx:if="{{!isLoggedIn}}">
+  <view class="login-icon">
+    <t-icon name="lock" size="48" />
+  </view>
+  <text class="prompt-title">登录后享受更多功能</text>
+  <text class="prompt-desc">发布约球、查看历史、接收提醒等</text>
+</view>
+
+<!-- 用户统计（登录后显示） -->
+<view class="user-stats" wx:if="{{isLoggedIn}}">
+  <view class="stats-grid">
+    <view class="stat-item">
+      <text class="stat-number">{{stats.publishCount || 0}}</text>
+      <text class="stat-label">发布次数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{stats.joinCount || 0}}</text>
+      <text class="stat-label">参与次数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{stats.creditScore || 100}}</text>
+      <text class="stat-label">信用评分</text>
+    </view>
+  </view>
+</view>
+
+<!-- 功能菜单 -->
+<view class="menu-section">
+  <!-- 我的活动 -->
+  <view class="menu-group">
+    <view class="menu-item" bindtap="openMyPublish">
+      <view class="menu-icon icon-blue">
+        <t-icon name="edit" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">我的发布</view>
+        <view class="menu-desc">查看我发布的约球信息</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+    
+    <view class="menu-item" bindtap="openMyJoin">
+      <view class="menu-icon icon-green">
+        <t-icon name="user" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">我的参与</view>
+        <view class="menu-desc">查看我加入的约球活动</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+    
+    <view class="menu-item" bindtap="showFeature" data-feature="约球历史">
+      <view class="menu-icon icon-purple">
+        <t-icon name="time" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">约球历史</view>
+        <view class="menu-desc">查看历史约球记录</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+  </view>
+
+  <!-- 设置与帮助 -->
+  <view class="menu-group">
+    <view class="menu-item" bindtap="showFeature" data-feature="消息提醒">
+      <view class="menu-icon icon-orange">
+        <t-icon name="notification" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">消息提醒</view>
+        <view class="menu-desc">管理约球提醒设置</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+    
+    <view class="menu-item" bindtap="showFeature" data-feature="意见反馈">
+      <view class="menu-icon icon-red">
+        <t-icon name="help-circle" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">意见反馈</view>
+        <view class="menu-desc">提交建议或报告问题</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+    
+    <view class="menu-item" bindtap="showFeature" data-feature="关于我们">
+      <view class="menu-icon icon-blue">
+        <t-icon name="info-circle" size="24" />
+      </view>
+      <view class="menu-content">
+        <view class="menu-title">关于我们</view>
+        <view class="menu-desc">版本信息与联系方式</view>
+      </view>
+      <t-icon name="chevron-right" color="#999" />
+    </view>
+  </view>
+  
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{isLoggedIn}}">
+    <t-button theme="danger" variant="outline" size="large" block bindtap="logout">退出登录</t-button>
+  </view>
+</view>
+
+<!-- 我的发布列表 -->
+<view class="list-section" wx:if="{{isLoggedIn && activeList === 'publish'}}">
+  <view class="list-header">我的发布</view>
+  <t-loading wx:if="{{loadingList}}" theme="dots" />
+  <view wx:else>
+    <t-empty description="暂无发布" wx:if="{{!myPublishList.length}}" />
+    <view class="list" wx:else>
+      <view class="list-item" wx:for="{{myPublishList}}" wx:key="_id">
+        <view class="list-title">{{item.venueName}}｜{{item.displayTime}}</view>
+        <view class="list-sub">人数：{{item.displayCount}}｜{{item.address || ''}}</view>
+      </view>
+    </view>
+  </view>
+ </view>
+
+<!-- 我的参与列表 -->
+<view class="list-section" wx:if="{{isLoggedIn && activeList === 'join'}}">
+  <view class="list-header">我的参与</view>
+  <t-loading wx:if="{{loadingList}}" theme="dots" />
+  <view wx:else>
+    <t-empty description="暂无参与" wx:if="{{!myJoinList.length}}" />
+    <view class="list" wx:else>
+      <view class="list-item" wx:for="{{myJoinList}}" wx:key="_id">
+        <view class="list-title">{{item.venueName}}｜{{item.displayTime}}</view>
+        <view class="list-sub">人数：{{item.displayCount}}｜{{item.address || ''}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+

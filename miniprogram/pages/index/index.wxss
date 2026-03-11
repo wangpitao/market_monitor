@@ -1,0 +1,98 @@
+/**index.wxss**/
+.page-container {
+  background-color: #f6f6f6;
+  min-height: 100vh;
+  padding-bottom: 30rpx;
+  position: relative; /* For mask */
+}
+
+.search-box {
+  background-color: #fff;
+  padding: 16rpx 24rpx;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.02);
+}
+
+.stock-list {
+  margin-top: 20rpx;
+  padding: 0 24rpx;
+}
+
+.stock-item {
+  margin-bottom: 16rpx;
+  border-radius: 12rpx;
+  background-color: #fff !important;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.02);
+}
+
+.stock-price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.delete-icon {
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100rpx;
+  color: #999;
+}
+
+.empty-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+
+/* Login Mask */
+.login-mask {
+  position: absolute;
+  top: 100rpx; /* Below search bar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-tip-card {
+  background-color: white;
+  padding: 60rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.login-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.login-desc {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}

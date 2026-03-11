@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 实时盯盘助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0052D9', // TDesign Brand Blue
+                        success: '#00A870', // TDesign Success Green
+                        error: '#E34D59', // TDesign Error Red
+                        gray: {
+                            50: '#f3f3f3',
+                            100: '#eeeeee',
+                            400: '#999999',
+                            900: '#111111'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased pb-20">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-10 px-4 py-3 shadow-sm text-center font-bold text-lg text-brand mb-4">
+        我的
+    </header>
+
+    <!-- User Profile Card -->
+    <div class="px-4 mb-4">
+        <div class="bg-white rounded-lg shadow-sm p-6 flex flex-col items-center">
+             <!-- Avatar Placeholder -->
+            <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden mb-4 border-2 border-white shadow-lg">
+                <i class="fas fa-user text-4xl text-gray-400 mt-5 block text-center"></i>
+            </div>
+            
+            <!-- User Info (Logged Out State) -->
+            <!-- 
+            <button class="bg-brand text-white px-6 py-2 rounded-full font-bold shadow-md hover:bg-brand/90 transition text-sm">
+                获取头像昵称
+            </button> 
+            -->
+
+            <!-- User Info (Logged In State) -->
+            <h2 class="text-lg font-bold">微信用户</h2>
+            <p class="text-xs text-gray-400 mt-1">ID: user_8888</p>
+        </div>
+    </div>
+
+    <!-- Menu List -->
+    <div class="px-4">
+        <div class="bg-white rounded-lg shadow-sm divide-y divide-gray-100 overflow-hidden">
+             <!-- Menu Item 1 -->
+             <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition active:bg-gray-100">
+                <div class="flex items-center">
+                    <i class="fas fa-cog w-6 text-gray-400 text-center"></i>
+                    <span class="ml-3 text-sm font-medium">设置</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
+            </a>
+
+            <!-- Menu Item 2 -->
+             <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition active:bg-gray-100">
+                <div class="flex items-center">
+                    <i class="fas fa-headset w-6 text-gray-400 text-center"></i>
+                    <span class="ml-3 text-sm font-medium">联系客服</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
+            </a>
+
+             <!-- Menu Item 3 -->
+             <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition active:bg-gray-100">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle w-6 text-gray-400 text-center"></i>
+                    <span class="ml-3 text-sm font-medium">关于我们</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
+            </a>
+        </div>
+    </div>
+
+     <!-- Version Info -->
+     <div class="text-center mt-8 text-xs text-gray-300">
+        v1.0.0 Build 20240225
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-2 pb-4 safe-area-bottom z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-brand transition">
+            <i class="fas fa-list-ul text-xl mb-1"></i>
+            <span class="text-[10px]">自选</span>
+        </a>
+        <a href="market.html" class="flex flex-col items-center text-gray-400 hover:text-brand transition">
+            <i class="fas fa-globe text-xl mb-1"></i>
+            <span class="text-[10px]">市场</span>
+        </a>
+        <a href="me.html" class="flex flex-col items-center text-brand">
+            <i class="fas fa-user text-xl mb-1"></i>
+            <span class="text-[10px]">我的</span>
+        </a>
+    </nav>
+
+</body>
+</html>
