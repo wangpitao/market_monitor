@@ -8,6 +8,15 @@
 ### Introduction
 A WeChat MiniProgram for stock market monitoring and analysis, built with **WeChat Cloud Development** and **TDesign**. It provides real-time quotes, global indices, K-line charts, and AI-powered investment analysis.
 
+### Screenshots
+
+<div style="display: flex; justify-content: space-between; overflow-x: auto;">
+  <img src="doc/images/watchlist.jpg" alt="Watchlist" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/market.jpg" alt="Market Overview" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/stock_detail.jpg" alt="Stock Detail" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/ai_analysis.jpg" alt="AI Analysis" width="200" />
+</div>
+
 ### Features
 - **Real-time Quotes**: Supports A-shares, Hong Kong stocks, and US stocks (via Sina Finance API).
 - **Market Overview**: Real-time global indices and hot sector rankings.
@@ -37,6 +46,15 @@ A WeChat MiniProgram for stock market monitoring and analysis, built with **WeCh
 
 ### 简介
 一个基于 **微信云开发** 和 **TDesign** 构建的股票行情助手小程序。提供实时行情、全球指数、K线图表以及基于AI的投资分析建议。
+
+### 界面截图
+
+<div style="display: flex; justify-content: space-between; overflow-x: auto;">
+  <img src="doc/images/watchlist.jpg" alt="自选股列表" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/market.jpg" alt="市场概览" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/stock_detail.jpg" alt="个股详情" width="200" style="margin-right: 10px;" />
+  <img src="doc/images/ai_analysis.jpg" alt="AI分析" width="200" />
+</div>
 
 ### 功能特性
 - **实时行情**：支持A股、港股、美股实时数据（接入新浪财经API）。
