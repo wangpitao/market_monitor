@@ -20,7 +20,7 @@ App<IAppOption>({
   globalData: {
     hasLogin: false,
     userInfo: undefined,
-    env: "cloud1-0gfi50rxec17356d" 
+    env: "" 
   },
   
   onLaunch() {
